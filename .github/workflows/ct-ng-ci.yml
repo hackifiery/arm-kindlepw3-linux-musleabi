@@ -26,15 +26,14 @@ jobs:
       run: |
         cd crosstool-ng && \
         ./bootstrap && \
-        ./configure --enable-local
-    - name: build ct-ng
+        ./configure
+    - name: build & install ct-ng
       run: |
         cd crosstool-ng && \
-        make
+        make && \
+        make install
     - name: test ct-ng
       run: |
-        cd crosstool-ng && \
-        export PATH="${PWD}/bin:$PATH"
         ct-ng version
     - name: build toolchain
       run: |
