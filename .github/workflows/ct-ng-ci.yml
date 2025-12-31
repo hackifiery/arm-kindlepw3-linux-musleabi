@@ -1,0 +1,36 @@
+name: ct-ng CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: install deps for ct-ng
+      run: |
+        sudo apt install build-essential libncurses-dev flex bison gperf texinfo help2man libtool libtool-bin automake autoconf autopoint libglib2.0-dev libexpat-dev libgmp-dev libmpc-dev libmpfr-dev gawk bc libreadline-dev libssl-dev zlib1g-dev python3 python3-dev patchutils
+    - name: fetch ct-ng
+    - run: |
+        git clone https://github.com/crosstool-ng/crosstool-ng
+        cd crosstool-ng
+    - name: configure ct-ng
+    - run: |
+        ./configure --enable-local
+    - name: configure ct-ng
+    - run: |
+        make
+    - name: test ct-ng
+    - run: |
+        export PATH="${PWD}/bin:$PATH"
+        ct-ng version
+    - name: build toolchain
+    - run: |
+        ct-ng build -j$(nproc)
