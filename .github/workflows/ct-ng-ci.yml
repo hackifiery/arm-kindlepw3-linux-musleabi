@@ -25,6 +25,7 @@ jobs:
     - name: configure ct-ng
       run: |
         cd crosstool-ng && \
+        ./bootstrap && \
         ./configure --enable-local
     - name: build ct-ng
       run: |
