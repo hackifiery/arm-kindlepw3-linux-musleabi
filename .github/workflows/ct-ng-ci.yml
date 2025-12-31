@@ -22,12 +22,13 @@ jobs:
     - name: fetch ct-ng
       run: |
         git clone https://github.com/crosstool-ng/crosstool-ng
-        cd crosstool-ng
     - name: configure ct-ng
       run: |
+        cd crosstool-ng \
         ./configure --enable-local
     - name: build ct-ng
       run: |
+        cd crosstool-ng \
         make
     - name: test ct-ng
       run: |
